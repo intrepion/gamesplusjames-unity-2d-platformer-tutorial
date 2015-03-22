@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
 	private bool grounded;
 	private bool doubleJumped;
-	private Rigidbody2D rigidbody2D;
+	private new Rigidbody2D rigidbody2D;
 
 	// Use this for initialization
 	void Start ()
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
 	void FixedUpdate()
 	{
-		this.grounded = Physics2D.OverlapCircle (this.groundCheck.position, groundCheckRadius, whatIsGround);
+		this.grounded = Physics2D.OverlapCircle (this.groundCheck.position, this.groundCheckRadius, this.whatIsGround);
 	}
 	
 	// Update is called once per frame
@@ -42,17 +42,17 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			this.rigidbody2D.velocity = new Vector2(moveSpeed, this.rigidbody2D.velocity.y);
+			this.rigidbody2D.velocity = new Vector2(this.moveSpeed, this.rigidbody2D.velocity.y);
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-			this.rigidbody2D.velocity = new Vector2(-moveSpeed, this.rigidbody2D.velocity.y);
+			this.rigidbody2D.velocity = new Vector2(-this.moveSpeed, this.rigidbody2D.velocity.y);
 		}
 		
 	}
 
-	private void Jump()
+	public void Jump()
 	{
-		this.rigidbody2D.velocity = new Vector2(this.rigidbody2D.velocity.x, jumpHeight);
+		this.rigidbody2D.velocity = new Vector2(this.rigidbody2D.velocity.x, this.jumpHeight);
 	}
 }
