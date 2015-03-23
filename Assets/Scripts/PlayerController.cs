@@ -9,14 +9,16 @@ public class PlayerController : MonoBehaviour
 	public float groundCheckRadius;
 	public LayerMask whatIsGround;
 
+	private new Rigidbody2D rigidbody2D;
 	private bool grounded;
 	private bool doubleJumped;
-	private new Rigidbody2D rigidbody2D;
+	private Animator anim;
 
 	// Use this for initialization
 	void Start ()
 	{
 		this.rigidbody2D = GetComponent<Rigidbody2D> ();
+		this.anim = GetComponent<Animator> ();
 	}
 
 	void FixedUpdate()
@@ -31,6 +33,8 @@ public class PlayerController : MonoBehaviour
 		if (grounded) {
 			this.doubleJumped = false;
 		}
+
+		this.anim.SetBool ("Grounded", this.grounded);
 
 		if (Input.GetKeyDown (KeyCode.Space) && this.grounded) {
 			this.Jump ();
@@ -48,7 +52,14 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			this.rigidbody2D.velocity = new Vector2(-this.moveSpeed, this.rigidbody2D.velocity.y);
 		}
-		
+
+		this.anim.SetFloat ("Speed", Mathf.Abs(this.rigidbody2D.velocity.x));
+
+		if (this.rigidbody2D.velocity.x > 0) {
+			transform.localScale = new Vector3 (1f, 1f, 1f);
+		} else if (this.rigidbody2D.velocity.x < 0) {
+			transform.localScale = new Vector3 (-1f, 1f, 1f);
+		}
 	}
 
 	public void Jump()
