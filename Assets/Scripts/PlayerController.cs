@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	private bool grounded;
 	private bool doubleJumped;
 	private Animator anim;
+	private float moveVelocity;
 
 	// Use this for initialization
 	void Start ()
@@ -45,13 +46,17 @@ public class PlayerController : MonoBehaviour
 			this.doubleJumped = true;
 		}
 
+		this.moveVelocity = 0f;
+
 		if (Input.GetKey (KeyCode.RightArrow)) {
-			this.rigidbody2D.velocity = new Vector2(this.moveSpeed, this.rigidbody2D.velocity.y);
+			this.moveVelocity = this.moveSpeed;
 		}
 		
 		if (Input.GetKey (KeyCode.LeftArrow)) {
-			this.rigidbody2D.velocity = new Vector2(-this.moveSpeed, this.rigidbody2D.velocity.y);
+			this.moveVelocity = -this.moveSpeed;
 		}
+
+		this.rigidbody2D.velocity = new Vector2(this.moveVelocity, this.rigidbody2D.velocity.y);
 
 		this.anim.SetFloat ("Speed", Mathf.Abs(this.rigidbody2D.velocity.x));
 

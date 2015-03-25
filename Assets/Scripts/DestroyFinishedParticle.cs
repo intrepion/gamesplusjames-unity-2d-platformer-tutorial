@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DestroyFinishedParticle : MonoBehaviour
 {
-	private ParticleSystem particleSystem;
+	private new ParticleSystem particleSystem;
 
 	// Use this for initialization
 	void Start ()

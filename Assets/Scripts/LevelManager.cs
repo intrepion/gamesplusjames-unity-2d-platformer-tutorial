@@ -8,15 +8,18 @@ public class LevelManager : MonoBehaviour
 	public GameObject deathParticle;
 	public GameObject respawnParticle;
 	public float respawnDelay;
+	public int pointPenaltyOnDeath;
 
 	private PlayerController player;
 	private Renderer playerRenderer;
+	private Rigidbody2D playerRigidbody2D;
 
 	// Use this for initialization
 	void Start ()
 	{
 		this.player = FindObjectOfType<PlayerController> ();
 		this.playerRenderer = this.player.GetComponent<Renderer> ();
+		this.playerRigidbody2D = this.player.GetComponent<Rigidbody2D> ();
 	}
 	
 	// Update is called once per frame
@@ -35,6 +38,8 @@ public class LevelManager : MonoBehaviour
 		Instantiate (this.deathParticle, this.player.transform.position, this.player.transform.rotation);
 		this.player.enabled = false;
 		this.playerRenderer.enabled = false;
+		this.playerRigidbody2D.velocity = Vector2.zero;
+		ScoreManager.AddPoints (-this.pointPenaltyOnDeath);
 		Debug.Log ("Player Respawn");
 		yield return new WaitForSeconds (this.respawnDelay);
 		this.player.transform.position = this.currentCheckpoint.transform.position;
