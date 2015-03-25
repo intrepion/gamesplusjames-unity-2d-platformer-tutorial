@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
 	private PlayerController player;
 	private Renderer playerRenderer;
 	private Rigidbody2D playerRigidbody2D;
+	private float gravityStore;
 
 	// Use this for initialization
 	void Start ()
@@ -38,10 +39,13 @@ public class LevelManager : MonoBehaviour
 		Instantiate (this.deathParticle, this.player.transform.position, this.player.transform.rotation);
 		this.player.enabled = false;
 		this.playerRenderer.enabled = false;
+		this.gravityStore = this.playerRigidbody2D.gravityScale;
+		this.playerRigidbody2D.gravityScale = 0f;
 		this.playerRigidbody2D.velocity = Vector2.zero;
 		ScoreManager.AddPoints (-this.pointPenaltyOnDeath);
 		Debug.Log ("Player Respawn");
 		yield return new WaitForSeconds (this.respawnDelay);
+		this.playerRigidbody2D.gravityScale = this.gravityStore;
 		this.player.transform.position = this.currentCheckpoint.transform.position;
 		this.player.enabled = true;
 		this.playerRenderer.enabled = true;
