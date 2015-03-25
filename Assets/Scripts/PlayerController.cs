@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 	public Transform groundCheck;
 	public float groundCheckRadius;
 	public LayerMask whatIsGround;
+	public Transform firePoint;
+	public GameObject ninjaStar;
 
 	private new Rigidbody2D rigidbody2D;
 	private bool grounded;
@@ -64,6 +66,10 @@ public class PlayerController : MonoBehaviour
 			transform.localScale = new Vector3 (1f, 1f, 1f);
 		} else if (this.rigidbody2D.velocity.x < 0) {
 			transform.localScale = new Vector3 (-1f, 1f, 1f);
+		}
+
+		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+			Instantiate(ninjaStar, firePoint.position, firePoint.rotation);
 		}
 	}
 
