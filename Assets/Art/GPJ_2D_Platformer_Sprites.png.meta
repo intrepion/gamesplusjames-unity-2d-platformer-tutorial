@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a6127eb2f4db74abc9c388f17f99c114
-timeCreated: 1427349589
+timeCreated: 1427351336
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -15,6 +15,7 @@ TextureImporter:
     21300016: Enemy_3
     21300018: NinjaStar
     21300020: Player Sword
+    21300022: Level Exit
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -167,6 +168,16 @@ TextureImporter:
         y: 101
         width: 9
         height: 5
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Level Exit
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 48
+        width: 19
+        height: 28
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
