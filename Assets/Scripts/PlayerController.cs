@@ -96,6 +96,14 @@ public class PlayerController : MonoBehaviour
 				Instantiate(this.ninjaStar, this.firePoint.position, this.firePoint.rotation);
 			}
 		}
+
+		if (this.anim.GetBool ("Sword")) {
+			this.anim.SetBool ("Sword", false);
+		}
+
+		if (Input.GetKey (KeyCode.Z)) {
+			this.anim.SetBool ("Sword", true);
+		}
 	}
 
 	public void Jump()
