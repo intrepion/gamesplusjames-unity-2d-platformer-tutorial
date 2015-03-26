@@ -7,10 +7,12 @@ public class EnemyHealthManager : MonoBehaviour
 	public GameObject deathEffect;
 	public int pointsOnDeath;
 
+	private AudioSource audio;
+
 	// Use this for initialization
 	void Start ()
 	{
-	
+		this.audio = GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
@@ -26,5 +28,6 @@ public class EnemyHealthManager : MonoBehaviour
 	public void giveDamage (int damageToGive)
 	{
 		this.enemyHealth -= damageToGive;
+		this.audio.Play ();
 	}
 }
