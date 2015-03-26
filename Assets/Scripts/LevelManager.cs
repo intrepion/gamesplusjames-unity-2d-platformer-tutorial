@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
 	public GameObject respawnParticle;
 	public float respawnDelay;
 	public int pointPenaltyOnDeath;
+	public HealthManager healthManager;
 
 	private PlayerController player;
 	private Renderer playerRenderer;
@@ -23,6 +24,7 @@ public class LevelManager : MonoBehaviour
 		this.playerRenderer = this.player.GetComponent<Renderer> ();
 		this.playerRigidbody2D = this.player.GetComponent<Rigidbody2D> ();
 		this.camera = FindObjectOfType<CameraController> ();
+		this.healthManager = FindObjectOfType<HealthManager> ();
 	}
 	
 	// Update is called once per frame
@@ -48,6 +50,8 @@ public class LevelManager : MonoBehaviour
 		this.player.transform.position = this.currentCheckpoint.transform.position;
 		this.player.enabled = true;
 		this.playerRenderer.enabled = true;
+		this.healthManager.FullHealth ();
+		this.healthManager.isDead = false;
 		this.camera.isFollowing = true;
 		Instantiate (this.respawnParticle, this.currentCheckpoint.transform.position, this.currentCheckpoint.transform.rotation);
 	}

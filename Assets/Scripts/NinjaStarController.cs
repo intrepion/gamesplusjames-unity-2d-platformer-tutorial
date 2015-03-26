@@ -8,6 +8,8 @@ public class NinjaStarController : MonoBehaviour
 	public GameObject enemyDeathEffect;
 	public GameObject impactEffect;
 	public int pointsForKill;
+	public float rotationSpeed;
+	public int damageToGive;
 
 	private Rigidbody2D rigidbody2D;
 
@@ -18,22 +20,22 @@ public class NinjaStarController : MonoBehaviour
 		this.player = FindObjectOfType<PlayerController> ();
 
 		if (this.player.transform.localScale.x < 0) {
-			speed = -speed;
+			this.speed = -this.speed;
+			this.rotationSpeed = -this.rotationSpeed;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		this.rigidbody2D.velocity = new Vector2 (speed, this.rigidbody2D.velocity.y);
+		this.rigidbody2D.velocity = new Vector2 (this.speed, this.rigidbody2D.velocity.y);
+		this.rigidbody2D.angularVelocity = this.rotationSpeed;
 	}
 
 	void OnTriggerEnter2D (Collider2D other)
 	{
 		if (other.tag == "Enemy") {
-			Instantiate (this.enemyDeathEffect, other.transform.position, other.transform.rotation);
-			Destroy (other.gameObject);
-			ScoreManager.AddPoints(this.pointsForKill);
+			other.GetComponent<EnemyHealthManager> ().giveDamage(this.damageToGive);
 		}
 
 		Instantiate (this.impactEffect, transform.position, transform.rotation);

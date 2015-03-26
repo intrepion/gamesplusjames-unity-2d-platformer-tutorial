@@ -10,12 +10,14 @@ public class PlayerController : MonoBehaviour
 	public LayerMask whatIsGround;
 	public Transform firePoint;
 	public GameObject ninjaStar;
+	public float shotDelay;
 
 	private new Rigidbody2D rigidbody2D;
 	private bool grounded;
 	private bool doubleJumped;
 	private Animator anim;
 	private float moveVelocity;
+	private float shotDelayCounter;
 
 	// Use this for initialization
 	void Start ()
@@ -69,7 +71,17 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown (KeyCode.LeftShift)) {
-			Instantiate(ninjaStar, firePoint.position, firePoint.rotation);
+			Instantiate(this.ninjaStar, this.firePoint.position, this.firePoint.rotation);
+			this.shotDelayCounter = this.shotDelay;
+		}
+
+		if (Input.GetKey (KeyCode.LeftShift)) {
+			this.shotDelayCounter -= Time.deltaTime;
+
+			if (this.shotDelayCounter <= 0) {
+				this.shotDelayCounter = this.shotDelay;
+				Instantiate(this.ninjaStar, this.firePoint.position, this.firePoint.rotation);
+			}
 		}
 	}
 
