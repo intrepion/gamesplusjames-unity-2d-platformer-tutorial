@@ -48,6 +48,7 @@ public class LevelManager : MonoBehaviour
 		Debug.Log ("Player Respawn");
 		yield return new WaitForSeconds (this.respawnDelay);
 		this.player.transform.position = this.currentCheckpoint.transform.position;
+		this.player.knockbackCount = 0;
 		this.player.enabled = true;
 		this.playerRenderer.enabled = true;
 		this.healthManager.FullHealth ();

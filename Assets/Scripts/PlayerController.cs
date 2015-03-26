@@ -11,6 +11,10 @@ public class PlayerController : MonoBehaviour
 	public Transform firePoint;
 	public GameObject ninjaStar;
 	public float shotDelay;
+	public float knockback;
+	public float knockbackLength;
+	public bool knockFromRight;
+	public float knockbackCount;
 
 	private new Rigidbody2D rigidbody2D;
 	private bool grounded;
@@ -60,7 +64,16 @@ public class PlayerController : MonoBehaviour
 			this.moveVelocity = -this.moveSpeed;
 		}
 
-		this.rigidbody2D.velocity = new Vector2(this.moveVelocity, this.rigidbody2D.velocity.y);
+		if (this.knockbackCount <= 0) {
+			this.rigidbody2D.velocity = new Vector2 (this.moveVelocity, this.rigidbody2D.velocity.y);
+		} else {
+			if (this.knockFromRight) {
+				this.rigidbody2D.velocity = new Vector2 (-this.knockback, this.knockback);
+			} else {
+				this.rigidbody2D.velocity = new Vector2 (this.knockback, this.knockback);
+			}
+			this.knockbackCount -= Time.deltaTime;
+		}
 
 		this.anim.SetFloat ("Speed", Mathf.Abs(this.rigidbody2D.velocity.x));
 
