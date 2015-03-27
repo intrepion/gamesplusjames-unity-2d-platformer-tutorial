@@ -8,12 +8,12 @@ public class MainMenu : MonoBehaviour
 
 	public void NewGame ()
 	{
-		Application.LoadLevel (startLevel);
+		Application.LoadLevel (this.startLevel);
 	}
 
 	public void LevelSelect ()
 	{
-		Application.LoadLevel (levelSelect);
+		Application.LoadLevel (this.levelSelect);
 	}
 
 	public void QuitGame ()
