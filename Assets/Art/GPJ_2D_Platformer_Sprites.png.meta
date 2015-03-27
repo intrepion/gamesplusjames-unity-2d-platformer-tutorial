@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a6127eb2f4db74abc9c388f17f99c114
-timeCreated: 1427351336
+timeCreated: 1427430468
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -16,6 +16,8 @@ TextureImporter:
     21300018: NinjaStar
     21300020: Player Sword
     21300022: Level Exit
+    21300024: Coin_2
+    21300026: Coin_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -178,6 +180,26 @@ TextureImporter:
         y: 48
         width: 19
         height: 28
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_2
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 84
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Coin_3
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 84
+        width: 1
+        height: 7
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
