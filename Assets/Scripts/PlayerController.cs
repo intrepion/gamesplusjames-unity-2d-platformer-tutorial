@@ -45,24 +45,16 @@ public class PlayerController : MonoBehaviour
 
 		this.anim.SetBool ("Grounded", this.grounded);
 
-		if (Input.GetKeyDown (KeyCode.Space) && this.grounded) {
+		if (Input.GetButtonDown ("Jump") && this.grounded) {
 			this.Jump ();
 		}
 
-		if (Input.GetKeyDown (KeyCode.Space) && !this.doubleJumped && !this.grounded) {
+		if (Input.GetButtonDown ("Jump") && !this.doubleJumped && !this.grounded) {
 			this.Jump ();
 			this.doubleJumped = true;
 		}
 
-		this.moveVelocity = 0f;
-
-		if (Input.GetKey (KeyCode.RightArrow)) {
-			this.moveVelocity = this.moveSpeed;
-		}
-		
-		if (Input.GetKey (KeyCode.LeftArrow)) {
-			this.moveVelocity = -this.moveSpeed;
-		}
+		this.moveVelocity = moveSpeed * Input.GetAxisRaw ("Horizontal");
 
 		if (this.knockbackCount <= 0) {
 			this.rigidbody2D.velocity = new Vector2 (this.moveVelocity, this.rigidbody2D.velocity.y);
@@ -83,12 +75,12 @@ public class PlayerController : MonoBehaviour
 			transform.localScale = new Vector3 (-1f, 1f, 1f);
 		}
 
-		if (Input.GetKeyDown (KeyCode.LeftShift)) {
+		if (Input.GetButtonDown ("Fire1")) {
 			Instantiate(this.ninjaStar, this.firePoint.position, this.firePoint.rotation);
 			this.shotDelayCounter = this.shotDelay;
 		}
 
-		if (Input.GetKey (KeyCode.LeftShift)) {
+		if (Input.GetButton ("Fire1")) {
 			this.shotDelayCounter -= Time.deltaTime;
 
 			if (this.shotDelayCounter <= 0) {
@@ -101,7 +93,7 @@ public class PlayerController : MonoBehaviour
 			this.anim.SetBool ("Sword", false);
 		}
 
-		if (Input.GetKey (KeyCode.Z)) {
+		if (Input.GetButtonDown ("Fire2")) {
 			this.anim.SetBool ("Sword", true);
 		}
 	}
