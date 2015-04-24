@@ -18,7 +18,8 @@ public class HealthManager : MonoBehaviour
 	void Start ()
 	{
 		this.text = GetComponent<Text> ();
-		HealthManager.playerHealth = this.maxPlayerHealth;
+		//HealthManager.playerHealth = this.maxPlayerHealth;
+		HealthManager.playerHealth = PlayerPrefs.GetInt ("PlayerCurrentHealth");
 		this.levelManager = FindObjectOfType<LevelManager> ();
 		this.isDead = false;
 		this.lifeSystem = FindObjectOfType<LifeManager> ();
@@ -40,10 +41,12 @@ public class HealthManager : MonoBehaviour
 	public static void HurtPlayer (int damageToGive)
 	{
 		HealthManager.playerHealth -= damageToGive;
+		PlayerPrefs.SetInt ("PlayerCurrentHealth", HealthManager.playerHealth);
 	}
 
 	public void FullHealth ()
 	{
-		HealthManager.playerHealth = this.maxPlayerHealth;
+		HealthManager.playerHealth = PlayerPrefs.GetInt ("PlayerMaxHealth");
+		PlayerPrefs.SetInt ("PlayerCurrentHealth", HealthManager.playerHealth);
 	}
 }

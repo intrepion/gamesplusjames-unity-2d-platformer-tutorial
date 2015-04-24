@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class LifeManager : MonoBehaviour
 {
-	public int startingLives;
+	// public int startingLives;
 	public GameObject gameOverScreen;
 	public string mainMenu;
 	public float waitAfterGameOver;
@@ -18,7 +18,7 @@ public class LifeManager : MonoBehaviour
 	{
 		this.theText = GetComponent<Text> ();
 
-		this.lifeCounter = this.startingLives;
+		this.lifeCounter = PlayerPrefs.GetInt ("PlayerCurrentLives");
 
 		this.player = FindObjectOfType<PlayerController> ();
 	}
@@ -45,10 +45,12 @@ public class LifeManager : MonoBehaviour
 	public void GiveLife ()
 	{
 		this.lifeCounter++;
+		PlayerPrefs.SetInt ("PlayerCurrentLives", this.lifeCounter);
 	}
 
 	public void TakeLife ()
 	{
 		this.lifeCounter--;
+		PlayerPrefs.SetInt ("PlayerCurrentLives", this.lifeCounter);
 	}
 }
