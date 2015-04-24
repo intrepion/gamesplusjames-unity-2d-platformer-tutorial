@@ -12,6 +12,7 @@ public class HealthManager : MonoBehaviour
 	public bool isDead;
 
 	private LevelManager levelManager;
+	private LifeManager lifeSystem;
 
 	// Use this for initialization
 	void Start ()
@@ -20,6 +21,7 @@ public class HealthManager : MonoBehaviour
 		HealthManager.playerHealth = this.maxPlayerHealth;
 		this.levelManager = FindObjectOfType<LevelManager> ();
 		this.isDead = false;
+		this.lifeSystem = FindObjectOfType<LifeManager> ();
 	}
 	
 	// Update is called once per frame
@@ -29,6 +31,7 @@ public class HealthManager : MonoBehaviour
 			HealthManager.playerHealth = 0;
 			this.levelManager.RespawnPlayer();
 			this.isDead = true;
+			this.lifeSystem.TakeLife ();
 		}
 
 		this.text.text = "" + HealthManager.playerHealth;
