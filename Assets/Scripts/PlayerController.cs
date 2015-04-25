@@ -15,19 +15,24 @@ public class PlayerController : MonoBehaviour
 	public float knockbackLength;
 	public bool knockFromRight;
 	public float knockbackCount;
+	public bool onLadder;
+	public float climbSpeed;
 
-	private new Rigidbody2D rigidbody2D;
+	private Rigidbody2D myRigidbody2D;
 	private bool grounded;
 	private bool doubleJumped;
 	private Animator anim;
 	private float moveVelocity;
 	private float shotDelayCounter;
+	private float climbVelocity;
+	private float gravityStore;
 
 	// Use this for initialization
 	void Start ()
 	{
-		this.rigidbody2D = GetComponent<Rigidbody2D> ();
+		this.myRigidbody2D = GetComponent<Rigidbody2D> ();
 		this.anim = GetComponent<Animator> ();
+		this.gravityStore = this.myRigidbody2D.gravityScale;
 	}
 
 	void FixedUpdate()
@@ -57,21 +62,21 @@ public class PlayerController : MonoBehaviour
 		this.moveVelocity = moveSpeed * Input.GetAxisRaw ("Horizontal");
 
 		if (this.knockbackCount <= 0) {
-			this.rigidbody2D.velocity = new Vector2 (this.moveVelocity, this.rigidbody2D.velocity.y);
+			this.myRigidbody2D.velocity = new Vector2 (this.moveVelocity, this.myRigidbody2D.velocity.y);
 		} else {
 			if (this.knockFromRight) {
-				this.rigidbody2D.velocity = new Vector2 (-this.knockback, this.knockback);
+				this.myRigidbody2D.velocity = new Vector2 (-this.knockback, this.knockback);
 			} else {
-				this.rigidbody2D.velocity = new Vector2 (this.knockback, this.knockback);
+				this.myRigidbody2D.velocity = new Vector2 (this.knockback, this.knockback);
 			}
 			this.knockbackCount -= Time.deltaTime;
 		}
 
-		this.anim.SetFloat ("Speed", Mathf.Abs(this.rigidbody2D.velocity.x));
+		this.anim.SetFloat ("Speed", Mathf.Abs(this.myRigidbody2D.velocity.x));
 
-		if (this.rigidbody2D.velocity.x > 0) {
+		if (this.myRigidbody2D.velocity.x > 0) {
 			transform.localScale = new Vector3 (1f, 1f, 1f);
-		} else if (this.rigidbody2D.velocity.x < 0) {
+		} else if (this.GetComponent<Rigidbody2D>().velocity.x < 0) {
 			transform.localScale = new Vector3 (-1f, 1f, 1f);
 		}
 
@@ -96,10 +101,20 @@ public class PlayerController : MonoBehaviour
 		if (Input.GetButtonDown ("Fire2")) {
 			this.anim.SetBool ("Sword", true);
 		}
+
+		if (this.onLadder) {
+			this.myRigidbody2D.gravityScale = 0f;
+			this.climbVelocity = this.climbSpeed * Input.GetAxisRaw ("Vertical");
+			this.myRigidbody2D.velocity = new Vector2 (this.myRigidbody2D.velocity.x, this.climbVelocity);
+		}
+
+		if (!this.onLadder) {
+			this.myRigidbody2D.gravityScale = this.gravityStore;
+		}
 	}
 
 	public void Jump()
 	{
-		this.rigidbody2D.velocity = new Vector2(this.rigidbody2D.velocity.x, this.jumpHeight);
+		this.myRigidbody2D.velocity = new Vector2(this.myRigidbody2D.velocity.x, this.jumpHeight);
 	}
 }
