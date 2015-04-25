@@ -117,4 +117,18 @@ public class PlayerController : MonoBehaviour
 	{
 		this.myRigidbody2D.velocity = new Vector2(this.myRigidbody2D.velocity.x, this.jumpHeight);
 	}
+
+	void OnTriggerEnter2D (Collider2D other)
+	{
+		if (other.transform.tag == "MovingPlatform") {
+			transform.parent = other.transform;
+		}
+	}
+
+	void OnTriggerExit2D (Collider2D other)
+	{
+		if (other.transform.tag == "MovingPlatform") {
+			transform.parent = null;
+		}
+	}
 }

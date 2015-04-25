@@ -47,6 +47,7 @@ public class LevelManager : MonoBehaviour
 		ScoreManager.AddPoints (-this.pointPenaltyOnDeath);
 		Debug.Log ("Player Respawn");
 		yield return new WaitForSeconds (this.respawnDelay);
+		this.playerRigidbody2D.velocity = new Vector2 (0, 0);
 		this.player.transform.position = this.currentCheckpoint.transform.position;
 		this.player.knockbackCount = 0;
 		this.player.enabled = true;
