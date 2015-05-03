@@ -17,9 +17,7 @@ public class LifeManager : MonoBehaviour
 	void Start ()
 	{
 		this.theText = GetComponent<Text> ();
-
 		this.lifeCounter = PlayerPrefs.GetInt ("PlayerCurrentLives");
-
 		this.player = FindObjectOfType<PlayerController> ();
 	}
 	
