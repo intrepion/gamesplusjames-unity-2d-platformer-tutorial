@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a6127eb2f4db74abc9c388f17f99c114
-timeCreated: 1430668076
+timeCreated: 1432368328
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -20,6 +20,10 @@ TextureImporter:
     21300026: Coin_3
     21300028: Ladder
     21300030: Enemy_Star
+    21300032: flying_1
+    21300034: flying_2
+    21300036: flying_3
+    21300038: flying_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -222,6 +226,46 @@ TextureImporter:
         y: 95
         width: 9
         height: 9
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flying_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 49
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flying_2
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 49
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flying_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 49
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: flying_4
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 49
+        width: 16
+        height: 14
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
